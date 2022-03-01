@@ -11,7 +11,7 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/propertiesFiles/root/roo
         if entry.endswith('\n'):
             entry = entry.rstrip('\n')
         value = entry.split("=")
-        print("couple key-value: "+value)
+        print("couple key-value: ", value)
         valueProperty.append(value)
     print(valueProperty)
     with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'a+') as csvFile:
