@@ -57,6 +57,7 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') a
     print("@@@", rowsCompleteList)
     for language in range(0, 5):
         for file in files:
+            languagesValuesFinal[language].clear()
             for entry in rowsCompleteList[language]:
                 if file == entry[2]:
                     entry = list(entry)
@@ -66,7 +67,7 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') a
                     mapped = '='.join(entry)
                     mapped = mapped+"\n"
                     languagesValuesFinal[language].append(mapped)
-                    print("final file content: ", languagesValuesFinal[language])
+                    # print("final file content: ", languagesValuesFinal[language])
                     with open('/home/rossola/VSCodeProjects/propertiesToCsv/'+languages[language]+'/'+file+'_'+countryCodeList[language]+'.properties', 'w+') as configfile:
                         configfile.writelines(languagesValuesFinal[language])
     
