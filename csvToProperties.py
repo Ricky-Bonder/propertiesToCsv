@@ -6,7 +6,7 @@ from itertools import chain
 import configparser
 
 
-languages = ['ENGLISH', 'ITALIANO', 'DEUTSCH', 'FRANÇAIS', 'ESPAÑOL']
+languages = ['english', 'italian', 'german', 'french', 'spanish']
 files = ['root', 'cagepreparation', 'changepartialscreen', 'changetotalscreen', 'notification', 'reader', 'settings']
 
 keyProperty = list()
@@ -18,13 +18,21 @@ rowCompleteGerman = list()
 rowCompleteFrench = list()
 rowCompleteSpanish = list()
 
+rowsCompleteList = [rowCompleteEnglish, rowCompleteItalian, rowCompleteGerman, rowCompleteFrench, rowCompleteSpanish]
+
 englishValuesFinal = list()
+italianValuesFinal = list()
+germanValuesFinal = list()
+frenchValuesFinal = list()
+spanishValuesFinal = list()
+
+languagesValuesFinal = [englishValuesFinal, italianValuesFinal, germanValuesFinal, frenchValuesFinal, spanishValuesFinal]
+countryCodeList = ['en', 'it', 'de', 'fr', 'es']
 
 with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') as csvFile:
     reader = pandas.read_csv(csvFile)
     ofFileColumn = reader.iloc[:, 6]
     ofFileName = ofFileColumn.values
-    print(ofFileName)
 
     firstColumn = reader.iloc[:, 0]
     keyProperty = firstColumn.values
@@ -35,31 +43,31 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') a
         valueProperty = valuesColumn.values
         print("@@",valueProperty)
         if column == 1:
-            rowCompleteEnglish = list(zip(keyProperty, valueProperty, ofFileName))
+            rowsCompleteList[0] = list(zip(keyProperty, valueProperty, ofFileName))
         elif column == 2:
-            rowCompleteItalian = list(zip(keyProperty, valueProperty, ofFileName))
+            rowsCompleteList[1] = list(zip(keyProperty, valueProperty, ofFileName))
         elif column == 3:
-            rowCompleteGerman = list(zip(keyProperty, valueProperty, ofFileName))            
+            rowsCompleteList[2] = list(zip(keyProperty, valueProperty, ofFileName))            
         elif column == 4:
-            rowCompleteFrench = list(zip(keyProperty, valueProperty, ofFileName))
+            rowsCompleteList[3] = list(zip(keyProperty, valueProperty, ofFileName))
         elif column == 5:
-            rowCompleteSpanish = list(zip(keyProperty, valueProperty, ofFileName))
-        
-    for file in files:
-        for entry in rowCompleteEnglish:
-            if file == entry[2]:
-                entry = list(entry)
-                entry.pop(2)
-                print("file: ", file, " - put: ", entry)
-                entry = tuple(entry)
-                mapped = '='.join(entry)
-                mapped = mapped+"\n"
-                englishValuesFinal.append(mapped)
-                print(englishValuesFinal)
-                with open('/home/rossola/VSCodeProjects/propertiesToCsv/english/'+file+'_en.properties', 'w+') as configfile:
-                    configfile.writelines(englishValuesFinal)
-        
+            rowsCompleteList[4] = list(zip(keyProperty, valueProperty, ofFileName))
+    
 
-        
+    print("@@@", rowsCompleteList)
+    for language in range(0, 5):
+        for file in files:
+            for entry in rowsCompleteList[language]:
+                if file == entry[2]:
+                    entry = list(entry)
+                    entry.pop(2)
+                    print("file: ", file, " - put: ", entry)
+                    entry = tuple(entry)
+                    mapped = '='.join(entry)
+                    mapped = mapped+"\n"
+                    languagesValuesFinal[language].append(mapped)
+                    print("final file content: ", languagesValuesFinal[language])
+                    with open('/home/rossola/VSCodeProjects/propertiesToCsv/'+languages[language]+'/'+file+'_'+countryCodeList[language]+'.properties', 'w+') as configfile:
+                        configfile.writelines(languagesValuesFinal[language])
     
     
