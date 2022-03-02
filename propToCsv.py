@@ -5,13 +5,13 @@ import glob
 import os
 import configparser
 
-header = ['key', 'english', 'italian', 'deutsch', 'french', 'spanish', 'ofFile']
+languages = ['↓ KEYS ↓ (do not edit)', 'ENGLISH', 'ITALIANO', 'DEUTSCH', 'FRANÇAIS', 'ESPAÑOL', 'Of File (do not edit)']
 files = ['root', 'cagepreparation', 'changepartialscreen', 'changetotalscreen', 'notification', 'reader', 'settings']
 valueProperty = list()
 path = '/home/rossola/VSCodeProjects/propertiesToCsv/propertiesFiles/'
 
 with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'a+') as csvFile:
-    dw = csv.DictWriter(csvFile, delimiter=',', fieldnames=header)
+    dw = csv.DictWriter(csvFile, delimiter=',', fieldnames=languages)
     dw.writeheader()
     writer = csv.writer(csvFile)
     for file in files:
