@@ -36,12 +36,11 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') a
 
     firstColumn = reader.iloc[:, 0]
     keyProperty = firstColumn.values
-    print(keyProperty)
 
     for column in range(1, 6):
         valuesColumn = reader.iloc[:, column]
         valueProperty = valuesColumn.values
-        print("@@",valueProperty)
+        print("language ",column, "values: ",valueProperty)
         if column == 1:
             rowsCompleteList[0] = list(zip(keyProperty, valueProperty, ofFileName))
         elif column == 2:
@@ -54,7 +53,6 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') a
             rowsCompleteList[4] = list(zip(keyProperty, valueProperty, ofFileName))
     
 
-    print("@@@", rowsCompleteList)
     for language in range(0, 5):
         for file in files:
             languagesValuesFinal[language].clear()
