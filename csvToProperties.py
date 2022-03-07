@@ -5,8 +5,9 @@ import pandas
 from itertools import chain
 import configparser
 from pathlib import Path
+import os
 
-
+path = "~/VSCodeProjects/propertiesToCsv"
 
 languages = ['english', 'italian', 'german', 'french', 'spanish']
 files = ['cagepreparation', 'changepartialscreen', 'changetotalscreen', 'notification', 'reader', 'settings']
@@ -31,7 +32,7 @@ spanishValuesFinal = list()
 languagesValuesFinal = [englishValuesFinal, italianValuesFinal, germanValuesFinal, frenchValuesFinal, spanishValuesFinal]
 countryCodeList = ['en', 'it', 'de', 'fr', 'es']
 
-with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') as csvFile:
+with open(os.path.expanduser(path)+'/properties.csv', 'rb') as csvFile:
     reader = pandas.read_csv(csvFile)
     ofFileColumn = reader.iloc[:, 6]
     ofFileName = ofFileColumn.values
@@ -69,5 +70,5 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') a
                     mapped = mapped+"\n"
                     languagesValuesFinal[language].append(mapped)
                     # print("final file content: ", languagesValuesFinal[language])
-                    with open('/home/rossola/VSCodeProjects/propertiesToCsv/'+languages[language]+'/'+file+'_'+countryCodeList[language]+'.properties', 'w+') as configfile:
+                    with open(os.path.expanduser(path)+'/'+languages[language]+'/'+file+'_'+countryCodeList[language]+'.properties', 'w+') as configfile:
                         configfile.writelines(languagesValuesFinal[language])
