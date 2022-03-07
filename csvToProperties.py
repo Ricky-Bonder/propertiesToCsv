@@ -4,10 +4,12 @@ import csv
 import pandas
 from itertools import chain
 import configparser
+from pathlib import Path
+
 
 
 languages = ['english', 'italian', 'german', 'french', 'spanish']
-files = ['root', 'cagepreparation', 'changepartialscreen', 'changetotalscreen', 'notification', 'reader', 'settings']
+files = ['cagepreparation', 'changepartialscreen', 'changetotalscreen', 'notification', 'reader', 'settings']
 
 keyProperty = list()
 valueProperty = list()
@@ -54,6 +56,7 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') a
     
 
     for language in range(0, 5):
+        Path(languages[language]).mkdir(parents=True, exist_ok=True)
         for file in files:
             languagesValuesFinal[language].clear()
             for entry in rowsCompleteList[language]:
@@ -68,5 +71,3 @@ with open('/home/rossola/VSCodeProjects/propertiesToCsv/properties.csv', 'rb') a
                     # print("final file content: ", languagesValuesFinal[language])
                     with open('/home/rossola/VSCodeProjects/propertiesToCsv/'+languages[language]+'/'+file+'_'+countryCodeList[language]+'.properties', 'w+') as configfile:
                         configfile.writelines(languagesValuesFinal[language])
-    
-    

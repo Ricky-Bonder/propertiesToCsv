@@ -5,8 +5,8 @@ import glob
 import os
 import configparser
 
-languages = ['↓ KEYS ↓ (do not edit)', 'ENGLISH', 'ITALIANO', 'DEUTSCH', 'FRANÇAIS', 'ESPAÑOL', 'Of File (do not edit)']
-files = ['root', 'cagepreparation', 'changepartialscreen', 'changetotalscreen', 'notification', 'reader', 'settings']
+languages = ['↓ KEYS ↓ (do not edit)', 'ENGLISH', 'ITALIANO', 'DEUTSCH', 'FRANÇAIS', 'ESPAÑOL', 'Of File (do not edit)  ']
+files = ['cagepreparation', 'changepartialscreen', 'changetotalscreen', 'notification', 'reader', 'settings']
 valueProperty = list()
 path = '/home/rossola/VSCodeProjects/propertiesToCsv/propertiesFiles/'
 
